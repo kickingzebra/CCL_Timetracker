@@ -1,0 +1,43 @@
+# This file contains unit tests for the time-tracking application.
+# It ensures that the `clock_in`, `clock_out`, and other core functionalities work as expected.
+# Each test case sets up a fresh environment, runs the functions, and checks that the results are correct.
+
+import unittest
+from app.time_tracker import clock_in, clock_out, load_time_logs
+import os
+
+
+class TestTimeTracker(unittest.TestCase):
+    """
+    This class contains unit tests for the time tracking application. Each test checks the expected functionality
+    of the clock-in, clock-out, and time log viewing processes.
+    """
+
+    def setUp(self):
+        """Setup before each test to create a clean environment"""
+        self.user_id = "user123"  # Sample user ID for testing
+        # Remove any existing time log file before each test
+        if os.path.exists("time_logs.json"):
+            os.remove("time_logs.json")
+
+    def test_clock_in(self):
+        """Test clocking in functionality"""
+        clock_in(self.user_id)  # Call the clock_in function
+        time_logs = load_time_logs()  # Load the updated time logs
+        self.assertTrue(self.user_id in time_logs)  # Ensure the user is in the time logs
+        self.assertIsNotNone(time_logs[self.user_id]["clock_in_time"])  # Ensure the clock-in time is recorded
+
+    def test_clock_out(self):
+        """Test clocking out functionality"""
+        clock_in(self.user_id)  # First, clock in the user
+        clock_out(self.user_id)  # Then clock them out
+        time_logs = load_time_logs()  # Load the updated time logs
+        self.assertIsNotNone(time_logs[self.user_id]["clock_out_time"])  # Ensure the clock-out time is recorded
+        self.assertGreater(time_logs[self.user_id]["total_time"], 0)  # Ensure the total time worked is greater than 0
+
+    def test_view_time_log(self):
+        """Test viewing the time log"""
+        clock_in(self.user_id)  # Clock in the user
+        clock_out(self.user_id)  # Clock out the user
+        time_logs = load_time_logs()  # Load the time logs
+        self.assertIn(self.user_id, time_logs)  # Ensure the user ID is in the logs

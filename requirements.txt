@@ -1,0 +1,6 @@
+# This file contains a list of Python dependencies that are required to run the application.
+# The packages specified in this file will be installed when the Docker container is built.
+
+unittest  # For running unit tests
+flask     # For web framework (if you plan to extend the app to use web-based clocking)
+requests  # If your app makes HTTP requests (optional, depending on extension)
