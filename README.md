@@ -35,3 +35,7 @@ and tracks the total time worked. The project is containerized using Docker and 
 
 5. Access the app:
     The application will be accessible at `http://localhost:5000` if Flask is used for expansion.
+
+# CCL_Timetracker
+Staff Time Tracker with a cool agent
+
