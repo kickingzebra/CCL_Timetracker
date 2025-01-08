@@ -61,6 +61,8 @@ To set up the CI/CD pipeline for your project:
 
 ## System Architecture
 
+## System Architecture
+
 ```mermaid
 graph TD
     A[App] --> B[TimeManagementSystem]
@@ -83,6 +85,7 @@ graph TD
     K --> S[TaskNameInput]
     K --> T[StartButton]
     K --> U[StopButton]
+```
 
 
 This diagram shows the main components and their relationships:
